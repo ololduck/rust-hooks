@@ -13,3 +13,8 @@ hooks:
       - .*\.rs
     action: "cargo fmt"
     setup_script: rustfmt_setup.sh
+  - name: cargocheck
+    on_event:
+      - pre-commit
+    action: cargo check
+    
