@@ -3,13 +3,13 @@ hooks:
     on_event:
       - pre-commit
     on_file_regex: 
-      - "*.rs"
+      - ".*\.rs"
     action: "rustfmt {files}"
     setup_script: rustfmt_setup.sh
   - name: cargofmt
     on_event:
       - pre-commit
     on_file_regex: 
-      - "*.rs"
+      - ".*\.rs"
     action: "cargo fmt"
     setup_script: rustfmt_setup.sh
