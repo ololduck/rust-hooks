@@ -7,7 +7,7 @@ V_RE = re.compile(r'\d+\.\d+\.\d+')
 
 cargo_v = toml.load(open('Cargo.toml'))['package']['version']
 git_raw = os.popen('git describe --abbrev=0 --tags').read().strip('\n')
-print(git_raw)
+print("latest git version is %s, cargo version is %s" % (git_raw, cargo_v))
 git_v = V_RE.search(git_raw)
 if git_v is None:
     print("no git tag found")
