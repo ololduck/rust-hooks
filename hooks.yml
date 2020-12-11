@@ -7,14 +7,12 @@ hooks:
     action: "rustfmt {files}"
     setup_script: rustfmt_setup.sh
   - name: cargofmt
-    on_event:
-      - pre-commit
     on_file_regex:
       - .*\.rs
-    action: "cargo fmt"
+    action: cargo fmt
     setup_script: rustfmt_setup.sh
   - name: cargocheck
-    on_event:
-      - pre-commit
     action: cargo check
-    
+  # this one checks if cargo.toml version is at least equal to the last git tag
+  - name: version_match
+    action: check_version.py
