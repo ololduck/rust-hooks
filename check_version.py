@@ -19,3 +19,6 @@ for i in [0, 1, 2]:
     if gv[i] > cv[i]:
         print("last git tag is greater than cargo.toml's version")
         exit(1)
+    elif cv[i] > gv[i]:
+        print("Cargo version is greater than git. Don't forget to tag!")
+        exit(0)
