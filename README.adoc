@@ -1,0 +1,157 @@
+= rust hooks
+
+This repo contains hook definitions to be consumed by https://github.com/paulollivier/git-hooks[git-hooks], aimed at rust projects.
+
+== hooks
+=== rustfmt
+This hook is useful to reformat files according to rust's standards.
+
+.Override-able values
+|===
+| key | default
+
+| on_event
+| pre-commit
+
+| on_file_regex
+| .*\.rs
+
+| action
+| rustfmt {files}
+|===
+
+.Usage in .hooks.yaml
+[source, yaml]
+----
+hooks:
+  - name: rustfmt
+----
+
+=== cargo fmt
+The same as `rustfmt`, but acts on the whole project
+
+.Override-able values
+|===
+| key | default
+
+| on_event
+| pre-commit
+
+| on_file_regex
+| .*
+
+| action
+| cargo fmt
+|===
+
+.Usage in .hooks.yaml
+[source, yaml]
+----
+hooks:
+  - name: cargo fmt
+----
+
+=== cargo check
+Runs the compiler on the rust project, reporting errors
+
+.Override-able values
+|===
+| key | default
+
+| on_event
+| pre-commit
+
+| on_file_regex
+| .*
+
+| action
+| cargo check
+|===
+
+.Usage in .hooks.yaml
+[source, yaml]
+----
+hooks:
+  - name: cargo check
+----
+
+=== cargo test
+Launches the project's tests
+
+.Override-able values
+|===
+| key | default
+
+| on_event
+| pre-push
+
+| on_file_regex
+| .*
+
+| action
+| cargo test
+|===
+
+.Usage in .hooks.yaml
+[source, yaml]
+----
+hooks:
+  - name: cargo test
+----
+
+=== clippy
+
+Runs https://github.com/rust-lang/rust-clippy[clippy] on your project
+
+.Override-able values
+|===
+| key | default
+
+| on_event
+| pre-push
+
+| on_file_regex
+| .*
+
+| action
+| cargo clippy
+|===
+
+.Usage in .hooks.yaml
+[source, yaml]
+----
+hooks:
+  - name: clippy
+----
+
+=== version_match
+
+A simple python script looking for inconsistencies between `Cargo.toml`'s `package.version` and the latest git tag.
+
+It will fail the event if the most recent git tag is greater than the package's version
+
+[WARN]
+====
+This only supports simple version string in the form `<digits>.<digits>.<digits>`, which is the default cargo format.
+====
+
+.Override-able values
+|===
+| key | default
+
+| on_event
+| pre-commit
+
+| on_file_regex
+| .*
+
+| action
+| version_match
+|===
+
+.Usage in .hooks.yaml
+[source, yaml]
+----
+hooks:
+  - name: version_match
+----
